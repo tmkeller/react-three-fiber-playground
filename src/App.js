@@ -2,8 +2,9 @@ import React, { Suspense, useRef, useState } from "react";
 //R3F
 import { Canvas, useFrame } from "react-three-fiber";
 // Deai - R3F
-import { softShadows, useGLTF, OrbitControls } from "@react-three/drei";
-import { CubeTextureLoader } from 'three';
+import { softShadows, useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import { CubeTextureLoader } from "three";
+import * as THREE from "three";
 // Styles
 import "./App.css";
 // React Spring
@@ -21,6 +22,7 @@ function KittyA(props) {
     group.current.rotation.y = -Math.atan(( window.innerWidth/2 - props.mouseX ) / ( window.innerWidth/2 ));
   })
   const { nodes, materials } = useGLTF('/3d/KittyA.gltf')
+
   return (
       <group ref={group} {...props} dispose={null}>
       <group position={[0, 0, 0]}>
@@ -30,6 +32,20 @@ function KittyA(props) {
   )
 }
 
+// function SkyBox() {
+//   const { scene } = useThree();
+//   const loader = new CubeTextureLoader();
+
+//   scene.background = texture;
+//   const texture = loader.load([
+//     "/3d/80sbg.jpg",
+//     "/3d/80sbg.jpg",
+//     "/3d/80sbg.jpg",
+//     "/3d/80sbg.jpg",
+//     "/3d/80sbg.jpg",
+//     "/3d/80sbg.jpg"
+//   ])
+// }
 // const SpinningMesh = ({ position, color, speed, args }) => {
 //   //ref to target the mesh
 //   const mesh = useRef();
