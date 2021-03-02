@@ -1,10 +1,9 @@
 import React, { Suspense, useRef, useState } from "react";
 //R3F
-import { Canvas, useFrame } from "react-three-fiber";
+import { Canvas, useFrame, useThree } from "react-three-fiber";
 // Deai - R3F
 import { softShadows, useGLTF, OrbitControls, Environment } from "@react-three/drei";
-import { CubeTextureLoader } from "three";
-import * as THREE from "three";
+import { CubeTextureLoader, Scene } from "three";
 // Styles
 import "./App.css";
 // React Spring
@@ -32,20 +31,21 @@ function KittyA(props) {
   )
 }
 
-// function SkyBox() {
-//   const { scene } = useThree();
-//   const loader = new CubeTextureLoader();
+function SkyBox() {
+  const { scene } = useThree();
+  const loader = new CubeTextureLoader();
 
-//   scene.background = texture;
-//   const texture = loader.load([
-//     "/3d/80sbg.jpg",
-//     "/3d/80sbg.jpg",
-//     "/3d/80sbg.jpg",
-//     "/3d/80sbg.jpg",
-//     "/3d/80sbg.jpg",
-//     "/3d/80sbg.jpg"
-//   ])
-// }
+  const texture = loader.load([
+    "/3d/tronbg.png",
+    "/3d/tronbg.png",
+    "/3d/tronbg.png",
+    "/3d/tronbg.png",
+    "/3d/tronbg.png",
+    "/3d/tronbg.png"
+  ])
+  scene.background = texture;
+  return null;
+}
 // const SpinningMesh = ({ position, color, speed, args }) => {
 //   //ref to target the mesh
 //   const mesh = useRef();
@@ -137,6 +137,7 @@ const App = () => {
         {/* <OrbitControls/> */}
         <Suspense fallback={ null } >
           <KittyA mouseX={ mouseX } mouseY={ mouseY } position={[0, -2, 0]}/>
+          <SkyBox />
         </Suspense>
       </Canvas>
     </>
