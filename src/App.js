@@ -4,6 +4,7 @@ import { Canvas, useFrame, useThree } from "react-three-fiber";
 // Deai - R3F
 import { softShadows, useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import { CubeTextureLoader, Scene } from "three";
+import Kitty from "./components/3D/Kitty";
 // Styles
 import "./App.css";
 // React Spring
@@ -11,25 +12,6 @@ import "./App.css";
 
 // soft Shadows
 softShadows();
-
-function KittyA(props) {
-
-  const group = useRef();
-
-  useFrame(() => {
-    group.current.rotation.x = -Math.atan(( window.innerWidth/2 - props.mouseY ) / ( window.innerHeight/2 ));
-    group.current.rotation.y = -Math.atan(( window.innerWidth/2 - props.mouseX ) / ( window.innerWidth/2 ));
-  })
-  const { nodes, materials } = useGLTF('/3d/KittyA.gltf')
-
-  return (
-      <group ref={group} {...props} dispose={null}>
-      <group position={[0, 0, 0]}>
-          <mesh material={materials.blinn1} geometry={nodes.KittyA_MSHPIV.geometry} position={[0, 0, 0]} />
-      </group>
-      </group>
-  )
-}
 
 function SkyBox() {
   const { scene } = useThree();
@@ -136,7 +118,7 @@ const App = () => {
         </group> */}
         {/* <OrbitControls/> */}
         <Suspense fallback={ null } >
-          <KittyA mouseX={ mouseX } mouseY={ mouseY } position={[0, -2, 0]}/>
+          <Kitty mouseX={ mouseX } mouseY={ mouseY } position={[0, -2, 0]}/>
           <SkyBox />
         </Suspense>
       </Canvas>
