@@ -1,8 +1,8 @@
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense, useState } from "react";
 //R3F
-import { Canvas, useFrame, useThree } from "react-three-fiber";
+import { Canvas, useThree } from "react-three-fiber";
 // Deai - R3F
-import { softShadows, useGLTF, OrbitControls, Environment } from "@react-three/drei";
+import { softShadows } from "@react-three/drei";
 import { CubeTextureLoader, Scene } from "three";
 import Kitty from "./components/3D/Kitty";
 // Styles

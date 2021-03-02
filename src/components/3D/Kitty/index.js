@@ -1,9 +1,6 @@
-import React, { Suspense, useRef, useState } from "react";
-//R3F
-import { Canvas, useFrame, useThree } from "react-three-fiber";
-// Deai - R3F
-import { softShadows, useGLTF, OrbitControls, Environment } from "@react-three/drei";
-import { CubeTextureLoader, Scene } from "three";
+import React, { useRef, useState } from "react";
+import { useFrame, useThree } from "react-three-fiber";
+import { useGLTF } from "@react-three/drei";
 
 function Kitty( props ) {
 
