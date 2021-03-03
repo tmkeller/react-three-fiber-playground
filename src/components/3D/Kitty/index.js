@@ -1,14 +1,16 @@
-import React, { useRef, useState } from "react";
-import { useFrame, useThree } from "react-three-fiber";
+import React, { useRef } from "react";
+import { useFrame } from "react-three-fiber";
 import { useGLTF } from "@react-three/drei";
+import useMousePosition from "../../../utils/useMousePosition";
 
 function Kitty( props ) {
 
     const group = useRef();
+    let mousePosition = useMousePosition();
   
     useFrame(() => {
-      group.current.rotation.x = -Math.atan(( window.innerWidth/2 - props.mouseY ) / ( window.innerHeight/2 ));
-      group.current.rotation.y = -Math.atan(( window.innerWidth/2 - props.mouseX ) / ( window.innerWidth/2 ));
+      group.current.rotation.x = -Math.atan(( window.innerWidth/2 - mousePosition.mouseY ) / ( window.innerHeight/2 ));
+      group.current.rotation.y = -Math.atan(( window.innerWidth/2 - mousePosition.mouseX ) / ( window.innerWidth/2 ));
     })
     const { nodes, materials } = useGLTF('/3d/KittyA.gltf')
   

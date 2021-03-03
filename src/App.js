@@ -1,17 +1,13 @@
 import React, { Suspense, useState } from "react";
 //R3F
 import { Canvas, useThree } from "react-three-fiber";
-// Deai - R3F
-import { softShadows } from "@react-three/drei";
-import { CubeTextureLoader, Scene } from "three";
+import { CubeTextureLoader } from "three";
 import Kitty from "./components/3D/Kitty";
+import ManageLights from "./components/3D/ManageLights";
 // Styles
 import "./App.css";
 // React Spring
 // import { useSpring, a } from "react-spring/three";
-
-// soft Shadows
-softShadows();
 
 function SkyBox() {
   const { scene } = useThree();
@@ -68,37 +64,17 @@ function SkyBox() {
 //     // </Box>
 //   );
 // };
-
 const App = () => {
-  const [ mouseX, setMouseX ] = useState(0);
-  const [ mouseY, setMouseY ] = useState(0);
+  const [ isPlaying, setIsPlaying ] = useState( false );
 
   return (
     <>
-      <p>X: { mouseX }, Y: { mouseY }, Window width: { window.innerWidth }</p>
       <Canvas
-        onMouseMove={ ( e ) => { 
-          setMouseX( e.clientX );
-          setMouseY( e.clientY );
-        }}
         colorManagement
         shadowMap
         camera={{ position: [0, 0, 11], fov: 70 }}>
         <ambientLight intensity={0.3} />
-        <directionalLight
-          castShadow
-          position={[0, 10, 0]}
-          intensity={1.5}
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-camera-far={50}
-          shadow-camera-left={-10}
-          shadow-camera-right={10}
-          shadow-camera-top={10}
-          shadow-camera-bottom={-10}
-        />
-        <pointLight position={[-10, 0, -20]} intensity={0.5} />
-        <pointLight position={[0, -10, 0]} intensity={1.5} />
+        <ManageLights isPlaying={ isPlaying } />
         {/* <group>
           <mesh
             rotation={[-Math.PI / 2, 0, 0]}
@@ -118,7 +94,7 @@ const App = () => {
         </group> */}
         {/* <OrbitControls/> */}
         <Suspense fallback={ null } >
-          <Kitty mouseX={ mouseX } mouseY={ mouseY } position={[0, -2, 0]}/>
+          <Kitty position={[0, -2, 0]}/>
           <SkyBox />
         </Suspense>
       </Canvas>
